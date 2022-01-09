@@ -10,17 +10,17 @@ import betterquesting.commands.BQ_CommandAdmin;
 import betterquesting.commands.BQ_CommandDebug;
 import betterquesting.commands.BQ_CommandUser;
 import betterquesting.commands.BQ_CopyProgress;
+import betterquesting.commands.bqs.BQS_Commands;
+import betterquesting.commands.bqs.BqsComDumpAdvancements;
 import betterquesting.core.proxies.CommonProxy;
 import betterquesting.handlers.ConfigHandler;
+import betterquesting.handlers.LootSaveLoad;
 import betterquesting.handlers.SaveLoadHandler;
 import betterquesting.items.ItemExtraLife;
 import betterquesting.items.ItemGuideBook;
 import betterquesting.items.ItemLootChest;
 import betterquesting.network.PacketQuesting;
 import betterquesting.network.PacketTypeRegistry;
-import betterquesting.commands.bqs.BQS_Commands;
-import betterquesting.commands.bqs.BqsComDumpAdvancements;
-import betterquesting.handlers.LootSaveLoad;
 import net.minecraft.block.Block;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ServerCommandManager;
@@ -123,8 +123,8 @@ public class BetterQuesting
 		manager.registerCommand(new BQ_CommandUser());
 		manager.registerCommand(new BQ_CopyProgress());
     
-    manager.registerCommand(new BQS_Commands());
-    manager.registerCommand(new BqsComDumpAdvancements());
+		manager.registerCommand(new BQS_Commands());
+		manager.registerCommand(new BqsComDumpAdvancements());
 
 		if((Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment")) manager.registerCommand(new BQ_CommandDebug());
 		
