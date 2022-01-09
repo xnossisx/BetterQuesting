@@ -139,29 +139,26 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
             paDescScroll.setEnabled(cvDesc.getScrollBounds().getHeight() > 0);
         }
 
-        //if(quest.getTasks().size() > 0) todo
-        {
-            btnDetect = new PanelButton(new GuiTransform(new Vector4f(0.5F, 1F, 1F, 1F), new GuiPadding(8, -16, 0, 0), 0), 7, QuestTranslation.translate("betterquesting.btn.detect_submit"));
-            btnDetect.setActive(false);
-            cvInner.addPanel(btnDetect);
+        btnDetect = new PanelButton(new GuiTransform(new Vector4f(0.5F, 1F, 1F, 1F), new GuiPadding(8, -16, 0, 0), 0), 7, QuestTranslation.translate("betterquesting.btn.detect_submit"));
+        btnDetect.setActive(false);
+        cvInner.addPanel(btnDetect);
 
-            PanelButton btnTaskLeft = new PanelButton(new GuiTransform(new Vector4f(0.5F, 1F, 0.5F, 1F), new GuiPadding(8, -16, -24, 0), 0), 4, "<");
-            btnTaskLeft.setActive(taskIndex > 0);
-            cvInner.addPanel(btnTaskLeft);
+        PanelButton btnTaskLeft = new PanelButton(new GuiTransform(new Vector4f(0.5F, 1F, 0.5F, 1F), new GuiPadding(8, -16, -24, 0), 0), 4, "<");
+        btnTaskLeft.setActive(taskIndex > 0);
+        cvInner.addPanel(btnTaskLeft);
 
-            PanelButton btnTaskRight = new PanelButton(new GuiTransform(GuiAlign.BOTTOM_RIGHT, new GuiPadding(-16, -16, 0, 0), 0), 5, ">");
-            btnTaskRight.setActive(taskIndex < quest.getTasks().size() - 1);
-            cvInner.addPanel(btnTaskRight);
+        PanelButton btnTaskRight = new PanelButton(new GuiTransform(GuiAlign.BOTTOM_RIGHT, new GuiPadding(-16, -16, 0, 0), 0), 5, ">");
+        btnTaskRight.setActive(taskIndex < quest.getTasks().size() - 1);
+        cvInner.addPanel(btnTaskRight);
 
-            rectTask = new GuiTransform(GuiAlign.HALF_RIGHT, new GuiPadding(8, 16, 0, 16), 0);
-            rectTask.setParent(cvInner.getTransform());
+        rectTask = new GuiTransform(GuiAlign.HALF_RIGHT, new GuiPadding(8, 16, 0, 16), 0);
+        rectTask.setParent(cvInner.getTransform());
 
-            PanelTextBox titleTask = new PanelTextBox(new GuiTransform(new Vector4f(0.5F, 0F, 1F, 0F), new GuiPadding(8, 0, 0, -16), 0), "?");
-            titleTask.setColor(PresetColor.TEXT_HEADER.getColor()).setAlignment(1);
-            cvInner.addPanel(titleTask);
+        PanelTextBox titleTask = new PanelTextBox(new GuiTransform(new Vector4f(0.5F, 0F, 1F, 0F), new GuiPadding(8, 0, 0, -16), 0), "?");
+        titleTask.setColor(PresetColor.TEXT_HEADER.getColor()).setAlignment(1);
+        cvInner.addPanel(titleTask);
 
-            refreshTaskPanel();
-        }
+        refreshTaskPanel();
 
         CanvasEmpty cvTaskPopup = new CanvasEmpty(rectTask) {
             @Override
