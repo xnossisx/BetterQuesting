@@ -132,7 +132,7 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         btnDetect.setActive(false);
         cvInner.addPanel(btnDetect);
 
-        rectTask = new GuiTransform(GuiAlign.HALF_RIGHT, new GuiPadding(8, 16, 0, 16), 0);
+        rectTask = new GuiTransform(GuiAlign.HALF_RIGHT, new GuiPadding(8, 0, 0, 16), 0);
         rectTask.setParent(cvInner.getTransform());
 
         refreshTaskPanel();
