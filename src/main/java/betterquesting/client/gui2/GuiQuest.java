@@ -10,6 +10,7 @@ import betterquesting.api.questing.tasks.ITask;
 import betterquesting.api2.client.gui.GuiScreenCanvas;
 import betterquesting.api2.client.gui.controls.IPanelButton;
 import betterquesting.api2.client.gui.controls.PanelButton;
+import betterquesting.api2.client.gui.controls.io.FloatSimpleIO;
 import betterquesting.api2.client.gui.events.IPEventListener;
 import betterquesting.api2.client.gui.events.PEventBroadcaster;
 import betterquesting.api2.client.gui.events.PanelEvent;
@@ -264,7 +265,7 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         PanelVScrollBar scList = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-8, 0, 0, 0), 0));
         pnReward.addPanel(scList);
         cvList.setScrollDriverY(scList);
-        cvList.setScrollDriverX(scList);
+        cvList.setScrollDriverX(new FloatSimpleIO(0.0F, 0.0F, 0.0F));
 
         for (DBEntry<IReward> entry : quest.getRewards().getEntries()) {
             IReward rew = entry.getValue();
@@ -304,7 +305,7 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         PanelVScrollBar scList = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-8, 0, 0, 0), 0));
         pnTask.addPanel(scList);
         cvList.setScrollDriverY(scList);
-        cvList.setScrollDriverX(scList);
+        cvList.setScrollDriverX(new FloatSimpleIO(0.0F, 0.0F, 0.0F));
 
         int yOffset = 0;
         List<DBEntry<ITask>> entries = quest.getTasks().getEntries();
