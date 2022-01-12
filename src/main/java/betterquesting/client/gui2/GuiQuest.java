@@ -56,8 +56,8 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
     private CanvasEmpty pnReward;
     private CanvasEmpty pnTask;
 
-    private int rewardIndex = 0;
-    private int taskIndex = 0;
+    private final int rewardIndex = 0;
+    private final int taskIndex = 0;
 
     public GuiQuest(GuiScreen parent, int questID) {
         super(parent);
@@ -111,20 +111,8 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
             btnClaim.setActive(false);
             cvInner.addPanel(btnClaim);
 
-            PanelButton btnRewardLeft = new PanelButton(new GuiTransform(GuiAlign.BOTTOM_LEFT, new GuiPadding(0, -16, -16, 0), 0), 2, "<");
-            btnRewardLeft.setActive(rewardIndex > 0);
-            cvInner.addPanel(btnRewardLeft);
-
-            PanelButton btnRewardRight = new PanelButton(new GuiTransform(new Vector4f(0.5F, 1F, 0.5F, 1F), new GuiPadding(-24, -16, 8, 0), 0), 3, ">");
-            btnRewardRight.setActive(rewardIndex < quest.getRewards().size() - 1);
-            cvInner.addPanel(btnRewardRight);
-
             rectReward = new GuiTransform(new Vector4f(0F, 0.5F, 0.5F, 1F), new GuiPadding(0, 0, 8, 16), 0);
             rectReward.setParent(cvInner.getTransform());
-
-            PanelTextBox titleReward = new PanelTextBox(new GuiTransform(new Vector4f(0F, 0.5F, 0.5F, 0.5F), new GuiPadding(0, -16, 8, 0), 0), "?");
-            titleReward.setColor(PresetColor.TEXT_HEADER.getColor()).setAlignment(1);
-            cvInner.addPanel(titleReward);
 
             refreshRewardPanel();
         } else {
@@ -144,37 +132,25 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         btnDetect.setActive(false);
         cvInner.addPanel(btnDetect);
 
-        PanelButton btnTaskLeft = new PanelButton(new GuiTransform(new Vector4f(0.5F, 1F, 0.5F, 1F), new GuiPadding(8, -16, -24, 0), 0), 4, "<");
-        btnTaskLeft.setActive(taskIndex > 0);
-        cvInner.addPanel(btnTaskLeft);
-
-        PanelButton btnTaskRight = new PanelButton(new GuiTransform(GuiAlign.BOTTOM_RIGHT, new GuiPadding(-16, -16, 0, 0), 0), 5, ">");
-        btnTaskRight.setActive(taskIndex < quest.getTasks().size() - 1);
-        cvInner.addPanel(btnTaskRight);
-
         rectTask = new GuiTransform(GuiAlign.HALF_RIGHT, new GuiPadding(8, 16, 0, 16), 0);
         rectTask.setParent(cvInner.getTransform());
-
-        PanelTextBox titleTask = new PanelTextBox(new GuiTransform(new Vector4f(0.5F, 0F, 1F, 0F), new GuiPadding(8, 0, 0, -16), 0), "?");
-        titleTask.setColor(PresetColor.TEXT_HEADER.getColor()).setAlignment(1);
-        cvInner.addPanel(titleTask);
 
         refreshTaskPanel();
 
         CanvasEmpty cvTaskPopup = new CanvasEmpty(rectTask) {
             @Override
             public boolean onMouseClick(int mx, int my, int click) {
-                if(click != 1) return false;
-                if(!(rectTask.getX() < mx && rectTask.getX()+rectTask.getWidth() > mx && rectTask.getY() < my && rectTask.getY() + rectTask.getHeight() > my)) return false;
-                if(QuestingAPI.getAPI(ApiReference.SETTINGS).canUserEdit(mc.player)){
+                if (click != 1) return false;
+                if (!(rectTask.getX() < mx && rectTask.getX() + rectTask.getWidth() > mx && rectTask.getY() < my && rectTask.getY() + rectTask.getHeight() > my))
+                    return false;
+                if (QuestingAPI.getAPI(ApiReference.SETTINGS).canUserEdit(mc.player)) {
                     PopContextMenu popup = new PopContextMenu(new GuiRectangle(mx, my, 64, 16), true);
-                    GuiTaskEditor editor = new GuiTaskEditor(new GuiQuest(parent,questID), quest);
+                    GuiTaskEditor editor = new GuiTaskEditor(new GuiQuest(parent, questID), quest);
                     Runnable action = () -> mc.displayGuiScreen(editor);
                     popup.addButton(QuestTranslation.translate("betterquesting.context.add_task"), null, action);
                     openPopup(popup);
                     return true;
-                }
-                else return false;
+                } else return false;
             }
         };
         cvInner.addPanel(cvTaskPopup);
