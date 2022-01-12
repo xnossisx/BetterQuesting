@@ -34,12 +34,12 @@ import betterquesting.network.handlers.NetQuestAction;
 import betterquesting.questing.QuestDatabase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.math.MathHelper;
 import org.lwjgl.util.vector.Vector4f;
 
 import java.util.List;
 
 public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeedsRefresh {
+
     private final int questID;
 
     private IQuest quest;
@@ -233,33 +233,13 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
     private void onButtonPress(PEventButton event) {
         IPanelButton btn = event.getButton();
 
-        if (btn.getButtonID() == 0) // Exit
-        {
+        if (btn.getButtonID() == 0) { // Exit
             mc.displayGuiScreen(this.parent);
-        } else if (btn.getButtonID() == 1) // Edit
-        {
+        } else if (btn.getButtonID() == 1) { // Edit
             mc.displayGuiScreen(new GuiQuestEditor(this, questID));
-        } else if (btn.getButtonID() == 2) // Reward previous
-        {
-            rewardIndex = MathHelper.clamp(rewardIndex - 1, 0, quest.getRewards().size() - 1);
-            refreshRewardPanel();
-        } else if (btn.getButtonID() == 3) // Reward next
-        {
-            rewardIndex = MathHelper.clamp(rewardIndex + 1, 0, quest.getRewards().size() - 1);
-            refreshRewardPanel();
-        } else if (btn.getButtonID() == 4) // Task previous
-        {
-            taskIndex = MathHelper.clamp(taskIndex - 1, 0, quest.getTasks().size() - 1);
-            refreshTaskPanel();
-        } else if (btn.getButtonID() == 5) // Task next
-        {
-            taskIndex = MathHelper.clamp(taskIndex + 1, 0, quest.getTasks().size() - 1);
-            refreshTaskPanel();
-        } else if (btn.getButtonID() == 6) // Reward claim
-        {
+        } else if (btn.getButtonID() == 6) { // Reward claim
             NetQuestAction.requestClaim(new int[]{questID});
-        } else if (btn.getButtonID() == 7) // Task detect/submit
-        {
+        } else if (btn.getButtonID() == 7) { // Task detect/submit
             NetQuestAction.requestDetect(new int[]{questID});
         }
     }
@@ -284,6 +264,7 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         PanelVScrollBar scList = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-8, 0, 0, 0), 0));
         pnReward.addPanel(scList);
         cvList.setScrollDriverY(scList);
+        cvList.setScrollDriverX(scList);
 
         for (DBEntry<IReward> entry : quest.getRewards().getEntries()) {
             IReward rew = entry.getValue();
@@ -323,6 +304,7 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         PanelVScrollBar scList = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-8, 0, 0, 0), 0));
         pnTask.addPanel(scList);
         cvList.setScrollDriverY(scList);
+        cvList.setScrollDriverX(scList);
 
         int yOffset = 0;
         List<DBEntry<ITask>> entries = quest.getTasks().getEntries();
