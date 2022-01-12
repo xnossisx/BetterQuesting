@@ -235,10 +235,10 @@ public class GuiQuest extends GuiScreenCanvas implements IPEventListener, INeeds
         cvInner.addPanel(pnReward);
         int yOffset = 0;
 
-        CanvasScrolling cvList = new CanvasScrolling(new GuiTransform(GuiAlign.FULL_BOX, new GuiPadding(0, 0, 8, 0), 0));
+        CanvasScrolling cvList = new CanvasScrolling(new GuiTransform(GuiAlign.FULL_BOX, new GuiPadding(0, 0, 8, 1), 0));
         pnReward.addPanel(cvList);
 
-        PanelVScrollBar scList = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-8, 0, 0, 0), 0));
+        PanelVScrollBar scList = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-8, 0, 0, 1), 0));
         pnReward.addPanel(scList);
         cvList.setScrollDriverY(scList);
         cvList.setScrollDriverX(new FloatSimpleIO(0.0F, 0.0F, 0.0F));
